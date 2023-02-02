@@ -1,6 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+  public static Player Instance { get; private set; }
+  public bool IsWalking { get; private set; }
+
+  public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
+  public class OnSelectedCounterChangeEventArgs : EventArgs {
+    public ClearCounter selectedCounter;
+  }
+
   [SerializeField, Min(0)]
   private float moveSpeed = 7f;
   [SerializeField]
@@ -16,22 +25,40 @@ public class Player : MonoBehaviour {
 
   [SerializeField]
   private LayerMask counterLayermask;
-  public bool IsWalking { get; private set; }
+
+  private ClearCounter selectedCounter;
+  public ClearCounter SelectedCounter {
+    get => selectedCounter;
+    private set {
+      selectedCounter = value;
+      OnSelectedCounterChange?.Invoke(this, new() { selectedCounter = SelectedCounter });
+    }
+  }
 
   private Vector3 lastInteractiveDirection;
+
+  private void Awake() {
+    if (Instance != null) {
+      Debug.LogError("There is more that one player instance");
+    }
+    Instance = this;
+  }
+
   private void Start() {
     gameImput.OnInteractAction += GameImput_OnInteractAction;
   }
 
   private void Update() {
     HandleMovement();
-  }
-
-  private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
     HandleInteractions();
   }
 
+  private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
+    SelectedCounter?.Interact();
+  }
+
   private void HandleInteractions() {
+
     var movementDirection = GetMovementDirection();
 
     if (movementDirection != Vector3.zero) {
@@ -46,9 +73,14 @@ public class Player : MonoBehaviour {
                         interactiveDistance,
                         counterLayermask)) {
       if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-        clearCounter.Interact();
+        if (clearCounter != SelectedCounter) {
+          SelectedCounter = clearCounter;
+        }
+        return;
       }
     }
+
+    SelectedCounter = null;
   }
 
   private void HandleMovement() {
