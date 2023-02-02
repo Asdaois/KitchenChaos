@@ -19,9 +19,15 @@ public class Player : MonoBehaviour {
   public bool IsWalking { get; private set; }
 
   private Vector3 lastInteractiveDirection;
+  private void Start() {
+    gameImput.OnInteractAction += GameImput_OnInteractAction;
+  }
 
   private void Update() {
     HandleMovement();
+  }
+
+  private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
     HandleInteractions();
   }
 
