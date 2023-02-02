@@ -7,17 +7,49 @@ public class Player : MonoBehaviour {
   private GameImput gameImput;
 
   [SerializeField]
-  float playerRadius = 0.7f;
+  private float playerRadius = 0.7f;
   [SerializeField]
-  float playerHeight = 2f;
+  private float playerHeight = 2f;
+
+  [SerializeField]
+  private float rotationSpeed = 10f;
+
+  [SerializeField]
+  private LayerMask counterLayermask;
   public bool IsWalking { get; private set; }
 
+  private Vector3 lastInteractiveDirection;
+
   private void Update() {
-    var normalizedInputVector = gameImput.GetInputVectorNormalized();
-    var movementDirection = new Vector3(normalizedInputVector.x, 0, normalizedInputVector.y);
+    HandleMovement();
+    HandleInteractions();
+  }
+
+  private void HandleInteractions() {
+    var movementDirection = GetMovementDirection();
+
+    if (movementDirection != Vector3.zero) {
+      lastInteractiveDirection = movementDirection;
+    }
+
+    var interactiveDistance = 2f;
+
+    if (Physics.Raycast(transform.position,
+                        lastInteractiveDirection,
+                        out RaycastHit raycastHit,
+                        interactiveDistance,
+                        counterLayermask)) {
+      if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+        clearCounter.Interact();
+      }
+    }
+  }
+
+  private void HandleMovement() {
+    var movementDirection = GetMovementDirection();
 
     var moveDistance = moveSpeed * Time.deltaTime;
-    bool canMove = CanMoveInDirection(movementDirection, moveDistance);
+    var canMove = CanMoveInDirection(movementDirection, moveDistance);
 
     if (!canMove) {
       canMove = CanMoveInDirection(ref movementDirection,
@@ -34,15 +66,23 @@ public class Player : MonoBehaviour {
       transform.position += movementDirection * (Time.deltaTime * moveSpeed);
     }
 
-    var rotationSpeed = 10f;
-    transform.forward = Vector3.Slerp(transform.forward, movementDirection, Time.deltaTime * rotationSpeed);
+    RotatePlayerTowardMomevementDirection(movementDirection);
 
     IsWalking = movementDirection != Vector3.zero;
   }
 
+  private Vector3 GetMovementDirection() {
+    var normalizedInputVector = gameImput.GetInputVectorNormalized();
+    var movementDirection = new Vector3(normalizedInputVector.x, 0, normalizedInputVector.y);
+    return movementDirection;
+  }
+
+  private void RotatePlayerTowardMomevementDirection(Vector3 movementDirection) {
+    transform.forward = Vector3.Slerp(transform.forward, movementDirection, Time.deltaTime * rotationSpeed);
+  }
+
   private bool CanMoveInDirection(ref Vector3 movementDirection, float moveDistance, Vector3 movementDirectionAxis) {
-    bool canMove;
-    canMove = CanMoveInDirection(movementDirectionAxis, moveDistance);
+    var canMove = CanMoveInDirection(movementDirectionAxis, moveDistance);
 
     if (canMove) {
       movementDirection = movementDirectionAxis.normalized;
