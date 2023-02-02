@@ -3,6 +3,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
   [SerializeField, Min(0)]
   private float moveSpeed = 7f;
+
+  public bool IsWalking { get; private set; }
   private void Update() {
     var inputVector = new Vector2();
 
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour {
 
     var rotationSpeed = 10f;
     transform.forward = Vector3.Slerp(transform.forward, movementDirection, Time.deltaTime * rotationSpeed);
-    Debug.Log(normalizedInputVector);
+
+    IsWalking = movementDirection != Vector3.zero;
   }
 }
