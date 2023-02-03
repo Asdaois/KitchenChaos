@@ -3,26 +3,17 @@ using UnityEngine;
 public class ClearCounter : MonoBehaviour, IKitchenObjectParent {
   [SerializeField] private KitchenObjectSO kitchenObjectSO;
   [SerializeField] private Transform counterTopPoint;
-  [SerializeField] private Transform otherCounter;
-  [SerializeField] private bool test;
 
   private KitchenObject kitchenObject;
 
-  private void Update() {
-    if (test && Input.GetKeyDown(KeyCode.Y)) {
-      if (GetKitchenObject() != null) {
-        GetKitchenObject().ClearCounter = otherCounter.GetComponent<ClearCounter>();
-      }
-    }
-  }
-
-  public void Interact() {
+  public void Interact(Player aPlayer) {
     if (GetKitchenObject() != null) {
+      kitchenObject.SetKitchenObjepctParent(aPlayer);
       return;
     }
 
     var kitchenObjectTransform = Instantiate(kitchenObjectSO.Prefab, GetKitchenObjectFollowTransform());
-    kitchenObjectTransform.GetComponent<KitchenObject>().ClearCounter = this;
+    kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjepctParent(this);
   }
 
   public KitchenObject GetKitchenObject() => kitchenObject;

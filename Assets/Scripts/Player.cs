@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKitchenObjectParent {
   public static Player Instance { get; private set; }
   public bool IsWalking { get; private set; }
 
@@ -10,21 +10,16 @@ public class Player : MonoBehaviour {
     public ClearCounter selectedCounter;
   }
 
-  [SerializeField, Min(0)]
-  private float moveSpeed = 7f;
-  [SerializeField]
-  private GameImput gameImput;
+  [SerializeField, Min(0)] private float moveSpeed = 7f;
+  [SerializeField] private GameImput gameImput;
+  [SerializeField] private float playerRadius = 0.7f;
+  [SerializeField] private float playerHeight = 2f;
 
-  [SerializeField]
-  private float playerRadius = 0.7f;
-  [SerializeField]
-  private float playerHeight = 2f;
+  [SerializeField] private float rotationSpeed = 10f;
 
-  [SerializeField]
-  private float rotationSpeed = 10f;
+  [SerializeField] private LayerMask counterLayermask;
 
-  [SerializeField]
-  private LayerMask counterLayermask;
+  [SerializeField] private Transform kitchenObjectHoldPoint;
 
   private ClearCounter selectedCounter;
   public ClearCounter SelectedCounter {
@@ -36,6 +31,7 @@ public class Player : MonoBehaviour {
   }
 
   private Vector3 lastInteractiveDirection;
+  private KitchenObject kitchenObject;
 
   private void Awake() {
     if (Instance != null) {
@@ -54,7 +50,7 @@ public class Player : MonoBehaviour {
   }
 
   private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
-    SelectedCounter?.Interact();
+    SelectedCounter?.Interact(this);
   }
 
   private void HandleInteractions() {
@@ -136,4 +132,11 @@ public class Player : MonoBehaviour {
                                        movementDirection,
                                        moveDistance);
   }
+
+
+  public KitchenObject GetKitchenObject() => kitchenObject;
+  public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
+  public void ClearKitchenObject() => kitchenObject = null;
+  public bool GetHasKitchenObject() => GetKitchenObject() != null;
+  public Transform GetKitchenObjectFollowTransform() => kitchenObjectHoldPoint;
 }
