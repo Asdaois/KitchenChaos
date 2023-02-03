@@ -1,37 +1,33 @@
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour {
-  [field: SerializeField] public KitchenObject KitchenObject { get; set; }
-
+public class ClearCounter : MonoBehaviour, IKitchenObjectParent {
   [SerializeField] private KitchenObjectSO kitchenObjectSO;
-  [field: SerializeField] public Transform CounterTopPoint { get; private set; }
-
+  [SerializeField] private Transform counterTopPoint;
   [SerializeField] private Transform otherCounter;
-
   [SerializeField] private bool test;
 
-
-  public bool HasKitchenObject => KitchenObject != null;
+  private KitchenObject kitchenObject;
 
   private void Update() {
-    if (test && Input.GetKey(KeyCode.Y)) {
-      if (KitchenObject != null) {
-        KitchenObject.ClearCounter = otherCounter.GetComponent<ClearCounter>();
+    if (test && Input.GetKeyDown(KeyCode.Y)) {
+      if (GetKitchenObject() != null) {
+        GetKitchenObject().ClearCounter = otherCounter.GetComponent<ClearCounter>();
       }
     }
   }
 
   public void Interact() {
-    if (KitchenObject != null) {
-      Debug.Log(KitchenObject.ClearCounter);
+    if (GetKitchenObject() != null) {
       return;
     }
 
-    var kitchenObjectTransform = Instantiate(kitchenObjectSO.Prefab, CounterTopPoint);
+    var kitchenObjectTransform = Instantiate(kitchenObjectSO.Prefab, GetKitchenObjectFollowTransform());
     kitchenObjectTransform.GetComponent<KitchenObject>().ClearCounter = this;
   }
 
-  public void ClearKitchenObject() {
-    KitchenObject = null;
-  }
+  public KitchenObject GetKitchenObject() => kitchenObject;
+  public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
+  public void ClearKitchenObject() => kitchenObject = null;
+  public bool GetHasKitchenObject() => GetKitchenObject() != null;
+  public Transform GetKitchenObjectFollowTransform() => counterTopPoint;
 }

@@ -16,17 +16,17 @@ public class KitchenObject : MonoBehaviour {
 
       clearCounter = value;
 
-      if (clearCounter.HasKitchenObject) {
+      if (clearCounter.GetHasKitchenObject()) {
         Debug.LogError("Counter has already have a kitchen object");
       }
 
-      clearCounter.KitchenObject = this;
+      clearCounter.SetKitchenObject(this);
       ColocateAtCounterTop();
     }
   }
 
   private void ColocateAtCounterTop() {
-    transform.parent = clearCounter.CounterTopPoint;
+    transform.parent = clearCounter.GetKitchenObjectFollowTransform();
     transform.localPosition = Vector3.zero;
   }
 }
