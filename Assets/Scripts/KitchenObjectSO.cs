@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/kitchenObject", fileName = "KitchenObject")]
+[CreateAssetMenu(menuName = "SO/KitchenObject", fileName = "KitchenObject")]
 public class KitchenObjectSO : ScriptableObject {
   [field: SerializeField]
   public string Name { get; private set; }
