@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
   public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
   public class OnSelectedCounterChangeEventArgs : EventArgs {
-    public ClearCounter selectedCounter;
+    public BaseCounter selectedCounter;
   }
 
   [SerializeField, Min(0)] private float moveSpeed = 7f;
@@ -21,8 +21,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
   [SerializeField] private Transform kitchenObjectHoldPoint;
 
-  private ClearCounter selectedCounter;
-  public ClearCounter SelectedCounter {
+  private BaseCounter selectedCounter;
+  public BaseCounter SelectedCounter {
     get => selectedCounter;
     private set {
       selectedCounter = value;
@@ -50,7 +50,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   }
 
   private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
-    SelectedCounter?.Interact(this);
+    if (SelectedCounter != null) {
+      SelectedCounter.Interact(this);
+    }
   }
 
   private void HandleInteractions() {
@@ -68,9 +70,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
                         out RaycastHit raycastHit,
                         interactiveDistance,
                         counterLayermask)) {
-      if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-        if (clearCounter != SelectedCounter) {
-          SelectedCounter = clearCounter;
+      if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
+        if (baseCounter != SelectedCounter) {
+          SelectedCounter = baseCounter;
         }
         return;
       }
