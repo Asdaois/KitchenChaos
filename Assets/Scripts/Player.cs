@@ -139,6 +139,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   public KitchenObject GetKitchenObject() => kitchenObject;
   public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
   public void ClearKitchenObject() => kitchenObject = null;
-  public bool GetHasKitchenObject() => GetKitchenObject() != null;
+  public bool HasKitchenObject() => GetKitchenObject() != null;
   public Transform GetKitchenObjectFollowTransform() => kitchenObjectHoldPoint;
 }
