@@ -3,6 +3,7 @@ using UnityEngine;
 public class SelectedCounterVisual : MonoBehaviour {
   [SerializeField] private BaseCounter baseCounter;
   [SerializeField] private GameObject[] visualSelectedCounter;
+
   private void Start() {
     Player.Instance.OnSelectedCounterChange += Player_OnSelectedCounterChange;
   }

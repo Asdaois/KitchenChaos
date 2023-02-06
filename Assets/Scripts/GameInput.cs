@@ -2,7 +2,9 @@ using System;
 using UnityEngine;
 
 public class GameImput : MonoBehaviour {
+
   public event EventHandler OnInteractAction;
+
   private PlayerInputActions playerInputActions;
 
   private void Awake() {

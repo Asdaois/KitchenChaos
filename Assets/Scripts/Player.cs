@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   public bool IsWalking { get; private set; }
 
   public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
+
   public class OnSelectedCounterChangeEventArgs : EventArgs {
     public BaseCounter selectedCounter;
   }
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   [SerializeField] private Transform kitchenObjectHoldPoint;
 
   private BaseCounter selectedCounter;
+
   public BaseCounter SelectedCounter {
     get => selectedCounter;
     private set {
@@ -56,7 +58,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   }
 
   private void HandleInteractions() {
-
     var movementDirection = GetMovementDirection();
 
     if (movementDirection != Vector3.zero) {
@@ -135,10 +136,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
                                        moveDistance);
   }
 
-
   public KitchenObject GetKitchenObject() => kitchenObject;
+
   public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
+
   public void ClearKitchenObject() => kitchenObject = null;
+
   public bool HasKitchenObject() => GetKitchenObject() != null;
+
   public Transform GetKitchenObjectFollowTransform() => kitchenObjectHoldPoint;
 }

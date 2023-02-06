@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(Animator))]
 public class ContainerCounterVisual : MonoBehaviour {
   private const string OPEN_CLOSE = "OpenClose";
@@ -10,7 +9,6 @@ public class ContainerCounterVisual : MonoBehaviour {
   private void Awake() {
     animator = GetComponent<Animator>();
   }
-
 
   private void Start() {
     containerCounter.OnPlayerGrabObject += ContainerCounter_OnPlayerGrabObject;
