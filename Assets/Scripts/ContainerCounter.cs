@@ -12,8 +12,7 @@ public class ContainerCounter : BaseCounter {
       return;
     }
 
-    var kitchenObjectTransform = Instantiate(kitchenObjectSO.Prefab);
-    kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjepctParent(aPlayer);
+    KitchenObject.Spawn(kitchenObjectSO, aPlayer);
     OnPlayerGrabObject?.Invoke(this, EventArgs.Empty);
   }
 }

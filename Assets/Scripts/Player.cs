@@ -44,6 +44,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
   private void Start() {
     gameImput.OnInteractAction += GameImput_OnInteractAction;
+    gameImput.OnInteractAlternativeAction += GameImput_OnInteractAlternativeAction;
+  }
+
+  private void GameImput_OnInteractAlternativeAction(object sender, EventArgs e) {
+    if (selectedCounter != null) {
+      SelectedCounter.InteractAlternative(this);
+    }
   }
 
   private void Update() {
@@ -89,12 +96,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     var canMove = CanMoveInDirection(movementDirection, moveDistance);
 
     if (!canMove) {
-      canMove = CanMoveInDirection(ref movementDirection,
+      canMove = movementDirection.x != 0 && CanMoveInDirection(ref movementDirection,
                                    moveDistance,
                                    new Vector3(movementDirection.x, 0, 0));
 
       if (!canMove) {
-        canMove = CanMoveInDirection(ref movementDirection,
+        canMove = movementDirection.z != 0 && CanMoveInDirection(ref movementDirection,
                                      moveDistance,
                                      new Vector3(0, 0, movementDirection.z));
       }

@@ -5,15 +5,21 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
   private KitchenObject kitchenObject;
 
-  public virtual void Interact(Player aPlayer) => Debug.LogError("BaseCounter.Interact()");
+  public void ClearKitchenObject() => kitchenObject = null;
 
   public KitchenObject GetKitchenObject() => kitchenObject;
 
-  public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
-
-  public void ClearKitchenObject() => kitchenObject = null;
+  public Transform GetKitchenObjectFollowTransform() => counterTopPoint;
 
   public bool HasKitchenObject() => GetKitchenObject() != null;
 
-  public Transform GetKitchenObjectFollowTransform() => counterTopPoint;
+  public virtual void Interact(Player aPlayer) {
+    Debug.LogError("BaseCounter.Interact()");
+  }
+
+  public virtual void InteractAlternative(Player player) {
+    Debug.LogError("BaseCounter.InteractAlternative()");
+  }
+
+  public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
 }
