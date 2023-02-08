@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 2877590810237758214, guid: 69c715bde7cc58b40942f4aa5151438d,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2877590810237758214, guid: 69c715bde7cc58b40942f4aa5151438d,
         type: 3}
@@ -195,7 +195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 4689321476299909794}
-  kitchenObjectSO: {fileID: 11400000, guid: 7f3e41fe5ee4b05419194af712ba598f, type: 2}
+  cuttinRecipes:
+  - {fileID: 11400000, guid: a6ed016241b2db14ca1c1cd49a00921d, type: 2}
+  - {fileID: 11400000, guid: 3d7b7834af31b784c80fee6be0a3142c, type: 2}
+  - {fileID: 11400000, guid: cdcf7ac1493536847a84a03617f61ee4, type: 2}
 --- !u!1001 &7498567280245160037
 PrefabInstance:
   m_ObjectHideFlags: 0
