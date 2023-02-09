@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Recipe")]
+[CreateAssetMenu(menuName = "SO/Recipe/Cutting")]
 public class CuttingRecipeSO : ScriptableObject {
   [field: SerializeField] public KitchenObjectSO Input { get; private set; }
 
