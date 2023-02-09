@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 292528128424445800}
-  recipes:
-  - {fileID: 11400000, guid: 44ab45b6424506c44adb8c845865411f, type: 2}
+  fryings:
   - {fileID: 11400000, guid: a338fd85f852fb44e9f26b27b8b0c185, type: 2}
+  burnigs:
+  - {fileID: 11400000, guid: 7a2f413d0d4048e46a3d20d75188e2d3, type: 2}
 --- !u!4 &3836128937643954127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2877590810237758214, guid: 69c715bde7cc58b40942f4aa5151438d,

@@ -9,18 +9,18 @@ public class StoveCounter : BaseCounter {
     Burned
   }
 
-  [SerializeField] private List<FryingRecipeSO> recipes;
+  [SerializeField] private List<FryingRecipeSO> fryings;
+  [SerializeField] private List<BurnigRecipeSO> burnigs;
 
   private float fryingTimer;
   private float burningTimer;
   private FryingRecipeSO friedRecipe;
-  private FryingRecipeSO burnedRecipe;
+  private BurnigRecipeSO burnedRecipe;
   private State currentState;
 
   private State CurrentState {
     get => currentState; set {
       currentState = value;
-      Debug.Log(currentState);
     }
   }
 
@@ -54,12 +54,13 @@ public class StoveCounter : BaseCounter {
   private void HandleFried() {
     burningTimer += Time.deltaTime;
 
-    if (burningTimer < GetFryingTimeMaximum(burnedRecipe)) {
+    if (burningTimer < burnedRecipe.FryingTimerMax) {
       return;
     }
 
     CurrentState = State.Burned;
-    SpawnKitchenObject(burnedRecipe);
+    GetKitchenObject().DestroySelf();
+    KitchenObject.Spawn(burnedRecipe.Output, this);
   }
 
   private void HandleFrying() {
@@ -87,7 +88,7 @@ public class StoveCounter : BaseCounter {
     if (CanInteractWithWitchenObjectFromPlayer(aPlayer)) {
       aPlayer.GetKitchenObject().SetKitchenObjepctParent(this);
       friedRecipe = GetFryingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO);
-      burnedRecipe = GetFryingRecipeSOFromInput(friedRecipe.Output);
+      burnedRecipe = GetBurnedRecipeSOFromInput(friedRecipe.Output);
       fryingTimer = 0f;
       CurrentState = State.Frying;
       return;
@@ -127,7 +128,17 @@ public class StoveCounter : BaseCounter {
   }
 
   private FryingRecipeSO GetFryingRecipeSOFromInput(KitchenObjectSO aKitchenObjectSO) {
-    foreach (var recipe in recipes) {
+    foreach (var recipe in fryings) {
+      if (recipe.Input == aKitchenObjectSO) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  private BurnigRecipeSO GetBurnedRecipeSOFromInput(KitchenObjectSO aKitchenObjectSO) {
+    foreach (var recipe in burnigs) {
       if (recipe.Input == aKitchenObjectSO) {
         return recipe;
       }
