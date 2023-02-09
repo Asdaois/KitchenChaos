@@ -12,7 +12,9 @@ public class StoveCounter : BaseCounter {
   [SerializeField] private List<FryingRecipeSO> recipes;
 
   private float fryingTimer;
-  private FryingRecipeSO currentRecipe;
+  private float burningTimer;
+  private FryingRecipeSO friedRecipe;
+  private FryingRecipeSO burnedRecipe;
   private State currentState;
 
   private State CurrentState {
@@ -42,43 +44,58 @@ public class StoveCounter : BaseCounter {
         HandleFrying();
         break;
       case State.Fried:
+        HandleFried();
         break;
       case State.Burned:
         break;
     }
   }
 
+  private void HandleFried() {
+    burningTimer += Time.deltaTime;
+
+    if (burningTimer < GetFryingTimeMaximum(burnedRecipe)) {
+      return;
+    }
+
+    CurrentState = State.Burned;
+    SpawnKitchenObject(burnedRecipe);
+  }
+
   private void HandleFrying() {
     fryingTimer += Time.deltaTime;
 
-    if (fryingTimer < GetFryingTimeMaximum()) {
+    if (fryingTimer < GetFryingTimeMaximum(friedRecipe)) {
       return;
     }
 
     CurrentState = State.Fried;
-    CookKitchenObject();
+    burningTimer = 0f;
+    SpawnKitchenObject(friedRecipe);
   }
 
-  private void CookKitchenObject() {
+  private void SpawnKitchenObject(FryingRecipeSO recipe) {
     GetKitchenObject().DestroySelf();
-    KitchenObject.Spawn(currentRecipe.Output, this);
+    KitchenObject.Spawn(recipe.Output, this);
   }
 
-  private float GetFryingTimeMaximum() {
-    return GetFryingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO).FryingTimerMax;
+  private float GetFryingTimeMaximum(FryingRecipeSO fryingRecipeSO) {
+    return fryingRecipeSO.FryingTimerMax;
   }
 
   public override void Interact(Player aPlayer) {
     if (CanInteractWithWitchenObjectFromPlayer(aPlayer)) {
       aPlayer.GetKitchenObject().SetKitchenObjepctParent(this);
-      currentRecipe = GetFryingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO);
-      CurrentState = State.Frying;
+      friedRecipe = GetFryingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO);
+      burnedRecipe = GetFryingRecipeSOFromInput(friedRecipe.Output);
       fryingTimer = 0f;
+      CurrentState = State.Frying;
       return;
     }
 
     if (CanPlayerRetrieveKitchenObject(aPlayer)) {
       GetKitchenObject().SetKitchenObjepctParent(aPlayer);
+      currentState = State.Idle;
     }
   }
 
