@@ -1,13 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class CuttingCounter : BaseCounter {
+public class CuttingCounter : BaseCounter, IHasProgress {
   public event EventHandler OnCut;
-  public event EventHandler<OnProgressChangeEventArgs> OnProgressChange;
-  public class OnProgressChangeEventArgs : EventArgs {
-    public float progressNormalized;
-  }
+  public event EventHandler<IHasProgress.OnProgressChangeEventArgs> OnProgressChange;
+
 
   [SerializeField] private CuttingRecipeSO[] cuttinRecipes;
   private int cuttingProgress;
