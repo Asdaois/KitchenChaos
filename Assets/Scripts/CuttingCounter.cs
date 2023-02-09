@@ -1,14 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CuttingCounter : BaseCounter {
+  public event EventHandler OnCut;
+  public event EventHandler<OnProgressChangeEventArgs> OnProgressChange;
+  public class OnProgressChangeEventArgs : EventArgs {
+    public float progressNormalized;
+  }
+
   [SerializeField] private CuttingRecipeSO[] cuttinRecipes;
   private int cuttingProgress;
+
+  public int CuttingProgress {
+    get => cuttingProgress; set {
+
+      cuttingProgress = value;
+      OnProgressChange?.Invoke(this, new() {
+        progressNormalized = (float)cuttingProgress / GetCuttingProgressMaximum()
+      });
+    }
+  }
+
   public override void Interact(Player aPlayer) {
     if (!HasKitchenObject()
       && aPlayer.HasKitchenObject()
       && HasRecipeWithKitchenObject(aPlayer.GetKitchenObject().KitchenObjectSO)) {
       aPlayer.GetKitchenObject().SetKitchenObjepctParent(this);
-      cuttingProgress = 0;
+      CuttingProgress = 0;
       return;
     }
 
@@ -23,17 +42,30 @@ public class CuttingCounter : BaseCounter {
       return;
     }
 
-    cuttingProgress++;
-    var cuttingRecipeSO = GetCuttingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO);
+    CutKitchenObject();
 
-    if (cuttingProgress < cuttingRecipeSO.CuttingProgresMaximum ) {
+    if (CuttingProgress < GetCuttingProgressMaximum()) {
       return;
     }
 
-    var outputKitchenObjectSO = GetOutputFromInput(GetKitchenObject().KitchenObjectSO);
+    KitchenObjectSO outputKitchenObjectSO = GetOutputKitchenObject();
 
+    CuttingProgress = 0;
     GetKitchenObject().DestroySelf();
     KitchenObject.Spawn(outputKitchenObjectSO, this);
+  }
+
+  private KitchenObjectSO GetOutputKitchenObject() {
+    return GetOutputFromInput(GetKitchenObject().KitchenObjectSO);
+  }
+
+  private void CutKitchenObject() {
+    CuttingProgress++;
+    OnCut?.Invoke(this, EventArgs.Empty);
+  }
+
+  private int GetCuttingProgressMaximum() {
+    return GetCuttingRecipeSOFromInput(GetKitchenObject().KitchenObjectSO).CuttingProgresMaximum;
   }
 
   private KitchenObjectSO GetOutputFromInput(KitchenObjectSO aKitchenObjectSO) {
