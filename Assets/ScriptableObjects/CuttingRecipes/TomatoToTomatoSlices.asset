@@ -16,3 +16,4 @@ MonoBehaviour:
     type: 2}
   <Output>k__BackingField: {fileID: 11400000, guid: 7f3e41fe5ee4b05419194af712ba598f,
     type: 2}
+  <CuttingProgresMaximum>k__BackingField: 3

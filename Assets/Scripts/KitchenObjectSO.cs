@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/KitchenObject", fileName = "KitchenObject")]
 public class KitchenObjectSO : ScriptableObject {
