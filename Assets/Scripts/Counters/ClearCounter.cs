@@ -9,17 +9,21 @@ public class ClearCounter : BaseCounter {
       return;
     }
 
+
     if (IsRetrivingKitchenObject(aPlayer)) {
       GetKitchenObject().SetKitchenObjepctParent(aPlayer);
     }
 
+
     if (IsHoldingAPlate(aPlayer)) {
-      if (aPlayer.GetKitchenObject().TryGetPlate(out var plateKitchenObject)
-        && !plateKitchenObject.TryAddIngredient(GetKitchenObject().KitchenObjectSO)) {
-        return;
+      if (aPlayer.GetKitchenObject().TryGetPlate(out var plateKitchenObject)) {
+        if (!plateKitchenObject.TryAddIngredient(GetKitchenObject().KitchenObjectSO)) {
+          return;
+        }
       }
       GetKitchenObject().DestroySelf();
     }
+
 
     if (IsHoldingAPlate(this) && aPlayer.HasKitchenObject()) {
       if (GetKitchenObject().TryGetPlate(out var plateKitchenObject)) {
