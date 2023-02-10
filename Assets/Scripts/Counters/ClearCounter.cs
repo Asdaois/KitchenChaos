@@ -12,6 +12,7 @@ public class ClearCounter : BaseCounter {
 
     if (IsRetrivingKitchenObject(aPlayer)) {
       GetKitchenObject().SetKitchenObjepctParent(aPlayer);
+      return;
     }
 
 
@@ -43,6 +44,4 @@ public class ClearCounter : BaseCounter {
   private bool IsRetrivingKitchenObject(Player aPlayer) {
     return HasKitchenObject() && !aPlayer.HasKitchenObject();
   }
-
-
 }

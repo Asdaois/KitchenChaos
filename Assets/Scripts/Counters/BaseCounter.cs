@@ -22,8 +22,6 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
   public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
   public static bool IsHoldingAPlate(IKitchenObjectParent aKitchenObjectParent) {
-
-    return aKitchenObjectParent.HasKitchenObject()
-           && aKitchenObjectParent.GetKitchenObject() is PlateKitchenObject;
+    return aKitchenObjectParent.HasKitchenObject() && aKitchenObjectParent.GetKitchenObject() is PlateKitchenObject;
   }
 }
