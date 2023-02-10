@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9f22acedcc8db43b8ec89878b8c1e0, type: 3}
+  m_Name: Plate
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Plate
+  <Prefab>k__BackingField: {fileID: 6770031247103029086, guid: 3dd98e7453641694790941c567bd7964,
+    type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 3928afb5321bb3d489bbd4ac581b29a2,
+    type: 3}
