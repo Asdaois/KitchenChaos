@@ -13,10 +13,18 @@ public class ClearCounter : BaseCounter {
       GetKitchenObject().SetKitchenObjepctParent(aPlayer);
     }
 
-    if (IsHoldingAPlate(aPlayer, out var plateKitchenObject)) {
-      plateKitchenObject.AddIngredient(GetKitchenObject().KitchenObjectSO);
+    if (IsHoldingAPlate(aPlayer)) {
+      if (aPlayer.GetKitchenObject().TryGetPlate(out var plateKitchenObject)
+        && !plateKitchenObject.TryAddIngredient(GetKitchenObject().KitchenObjectSO)) {
+        return;
+      }
       GetKitchenObject().DestroySelf();
     }
+  }
+  private static bool IsHoldingAPlate(IKitchenObjectParent aKitchenObjectParent) {
+
+    return aKitchenObjectParent.HasKitchenObject()
+           && aKitchenObjectParent.GetKitchenObject() is PlateKitchenObject;
   }
 
   private bool IsGivingAKitchenObject(Player aPlayer) {
@@ -27,10 +35,5 @@ public class ClearCounter : BaseCounter {
     return HasKitchenObject() && !aPlayer.HasKitchenObject();
   }
 
-  private static bool IsHoldingAPlate(IKitchenObjectParent aKitchenObjectParent, out PlateKitchenObject plateKitchenObject) {
-    plateKitchenObject = aKitchenObjectParent.GetKitchenObject() as PlateKitchenObject;
-    ;
-    return aKitchenObjectParent.HasKitchenObject()
-           && aKitchenObjectParent.GetKitchenObject() is PlateKitchenObject;
-  }
+
 }

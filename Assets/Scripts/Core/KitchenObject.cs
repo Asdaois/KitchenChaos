@@ -42,4 +42,10 @@ public class KitchenObject : MonoBehaviour {
 
     return kitchenObject;
   }
+
+  public bool TryGetPlate(out PlateKitchenObject plateKitchenObject) {
+    plateKitchenObject = this as PlateKitchenObject;
+
+    return this is PlateKitchenObject;
+  }
 }
