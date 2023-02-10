@@ -18,6 +18,10 @@ public class PlateKitchenObject : KitchenObject {
     OnIngredientAdded?.Invoke(this, new() { ingredient = aIngredient });
     return true;
   }
+
+  public List<KitchenObjectSO> GetIngredients() {
+    return ingredients;
+  }
 }
 
 public class OnIngredientAddedEventArgs {
