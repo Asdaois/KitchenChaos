@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 public class PlateCounter : BaseCounter {
-  private const float SPAWN_PLATE_TIMER_MAX = 10f;
+  private const float SPAWN_PLATE_TIMER_MAX = 4f;
   private const int SPAWN_PLATE_MAX = 4;
 
   public event EventHandler OnPlateSpawn;
