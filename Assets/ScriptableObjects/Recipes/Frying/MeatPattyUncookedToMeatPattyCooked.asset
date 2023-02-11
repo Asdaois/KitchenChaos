@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 2}
   <Output>k__BackingField: {fileID: 11400000, guid: 1d2f8efca6459c14e9a31f79291e7c87,
     type: 2}
-  <FryingTimerMax>k__BackingField: 3
+  <FryingTimerMax>k__BackingField: 4

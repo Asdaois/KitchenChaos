@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Salad
   m_EditorClassIdentifier: 
   ingredients:
-  - {fileID: 11400000, guid: 7cf955b5f4931774d9cbb54562af80ca, type: 2}
-  - {fileID: 11400000, guid: 1d2f8efca6459c14e9a31f79291e7c87, type: 2}
-  - {fileID: 11400000, guid: 213fce18033c1c8448054b414c2039a8, type: 2}
   - {fileID: 11400000, guid: 7f3e41fe5ee4b05419194af712ba598f, type: 2}
   - {fileID: 11400000, guid: a3d819e4ab428714c9f55097a3ac52ca, type: 2}
-  recipeName: Burger
+  recipeName: Salad

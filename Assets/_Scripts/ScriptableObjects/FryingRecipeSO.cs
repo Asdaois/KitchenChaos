@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Recipe/Frying")]
 public class FryingRecipeSO : ScriptableObject {
