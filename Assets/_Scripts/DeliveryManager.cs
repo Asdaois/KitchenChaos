@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour {
   public event EventHandler OnWaitingRecipeChange;
+  public event EventHandler OnRecipeSuccess;
+  public event EventHandler OnRecipeFailed;
 
   public static DeliveryManager Instance { get; private set; }
   [SerializeField] private RecipeListSO recipesSO;
@@ -49,9 +51,12 @@ public class DeliveryManager : MonoBehaviour {
         Debug.Log($"This recipe was delivered: {recipe}");
         waitingRecipes.Remove(recipe);
         OnRecipeChanged();
+        OnRecipeSuccess?.Invoke(this, new());
         return; //! Unsafe if your delete this return
       }
     }
+
+    OnRecipeFailed?.Invoke(this, new());
   }
 
   private void OnRecipeChanged() {

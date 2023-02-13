@@ -11,6 +11,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     public BaseCounter selectedCounter;
   }
 
+  public event EventHandler OnPickSomething;
+
   [SerializeField, Min(0)] private float moveSpeed = 7f;
   [SerializeField] private GameImput gameImput;
   [SerializeField] private float playerRadius = 0.7f;
@@ -145,7 +147,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
   public KitchenObject GetKitchenObject() => kitchenObject;
 
-  public void SetKitchenObject(KitchenObject aKitchenObject) => kitchenObject = aKitchenObject;
+  public void SetKitchenObject(KitchenObject aKitchenObject) {
+    if (aKitchenObject != null) {
+      OnPickSomething?.Invoke(this, EventArgs.Empty);
+    }
+    kitchenObject = aKitchenObject;
+  }
 
   public void ClearKitchenObject() => kitchenObject = null;
 
