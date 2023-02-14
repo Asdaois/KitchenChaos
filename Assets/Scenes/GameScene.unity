@@ -1272,12 +1272,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456579624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8324373, y: -0.22157247, z: 2.6122248}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1185851959}
+  - {fileID: 1637317049}
+  - {fileID: 782142472}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &499523010
 PrefabInstance:
@@ -1811,6 +1814,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 15042453}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &782142471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 782142472}
+  - component: {fileID: 782142473}
+  m_Layer: 0
+  m_Name: Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &782142472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782142471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 456579625}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &782142473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782142471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a4b4cb9e5f3454aba38d52fa9c2a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: {fileID: 11400000, guid: 0b1bbe5d6d2c9db4ca05f08c536392ff, type: 2}
 --- !u!4 &804116312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 738496745929321820, guid: 7c7655e9161c51f4eb72b9ffe58b5a01,
@@ -2158,6 +2206,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1010437784}
   - component: {fileID: 1010437785}
+  - component: {fileID: 1010437787}
+  - component: {fileID: 1010437786}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2203,6 +2253,35 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   kitchenObjectHoldPoint: {fileID: 2140683151}
+--- !u!114 &1010437786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010437783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149198223ba84a44aac8c34a72719e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerName: FootstepTimer
+  isActive: 1
+  oneshoot: 0
+  time: 0.1
+--- !u!114 &1010437787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010437783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f832ae532ab66964dabbb3ad8417d3ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1010437786}
 --- !u!1 &1150204471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,8 +2432,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 456579625}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1185851960
 MonoBehaviour:
@@ -2368,6 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149198223ba84a44aac8c34a72719e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerName: 
   isActive: 1
   oneshoot: 0
   time: 4
@@ -3074,8 +3154,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 456579625}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1638357311 stripped
 Transform:

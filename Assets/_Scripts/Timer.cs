@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour {
   public event EventHandler OnTimeup;
+  [SerializeField] private String timerName;
 
   [SerializeField] private bool isActive;
   [SerializeField] private bool oneshoot;

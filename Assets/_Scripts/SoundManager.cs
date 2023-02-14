@@ -2,8 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
-
   [SerializeField] private AudioClipRefSO audioClips;
+
+  public static SoundManager Instance { get; private set; }
+
+  private void Awake() {
+    Instance = this;
+  }
 
   private void Start() {
     DeliveryManager.Instance.OnRecipeSuccess += Delivery_OnRecipeSuccess;
@@ -44,5 +49,9 @@ public class SoundManager : MonoBehaviour {
 
   private void PlaySound(AudioClip anAudioClip, Vector3 aPosition, float aVolume = 1f) {
     AudioSource.PlayClipAtPoint(anAudioClip, aPosition, aVolume);
+  }
+
+  internal void PlayWalkSound(PlayerSound playerSound) {
+    PlaySound(audioClips.footstep, playerSound.transform.position);
   }
 }
