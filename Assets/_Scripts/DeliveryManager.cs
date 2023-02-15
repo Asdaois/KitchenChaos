@@ -13,14 +13,12 @@ public class DeliveryManager : MonoBehaviour {
   [SerializeField] private Timer spawRecipeTimer;
 
   private List<RecipeSO> waitingRecipes = new();
-
+  private int succesfulRecipesDelivered;
   private const int waitingRecipesMax = 4;
 
 
   private void Awake() {
-    if (Instance == null) {
-      Instance = this;
-    }
+    Instance = this;
   }
 
   private void Start() {
@@ -52,6 +50,7 @@ public class DeliveryManager : MonoBehaviour {
         waitingRecipes.Remove(recipe);
         OnRecipeChanged();
         OnRecipeSuccess?.Invoke(this, new());
+        succesfulRecipesDelivered += 1;
         return; //! Unsafe if your delete this return
       }
     }
@@ -65,5 +64,9 @@ public class DeliveryManager : MonoBehaviour {
 
   public List<RecipeSO> GetWaitingRecipes() {
     return waitingRecipes;
+  }
+
+  public int GetRecipesDeliveredAmount() {
+    return succesfulRecipesDelivered;
   }
 }

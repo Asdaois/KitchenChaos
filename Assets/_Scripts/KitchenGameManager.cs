@@ -17,7 +17,7 @@ public class KitchenGameManager : MonoBehaviour {
   [SerializeField] private Timer gamePlayingTimer;
 
 
-  private GameState currentState = GameState.WaitingForStart;
+  private GameState currentState;
   private GameState GetCurrentState() {
     return currentState;
   }
@@ -30,6 +30,7 @@ public class KitchenGameManager : MonoBehaviour {
 
   private void Awake() {
     Instance = this;
+    SetCurrentState(GameState.WaitingForStart);
   }
 
   private void Start() {
@@ -73,5 +74,9 @@ public class KitchenGameManager : MonoBehaviour {
 
   public float GetCurrentCountDownTimerTime() {
     return countdownToStartTimer.GetAlarmTime() - countdownToStartTimer.GetCurrentTimeUntilAlarm();
+  }
+
+  internal bool IsGameOverActive() {
+    return currentState == GameState.GameOver;
   }
 }
