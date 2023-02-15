@@ -50,9 +50,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   }
 
   private void GameImput_OnInteractAlternativeAction(object sender, EventArgs e) {
-    if (selectedCounter != null) {
-      SelectedCounter.InteractAlternative(this);
-    }
+    if (!KitchenGameManager.Instance.IsGamePlaying())
+      return;
+    if (selectedCounter == null)
+      return;
+
+    SelectedCounter.InteractAlternative(this);
   }
 
   private void Update() {
@@ -61,9 +64,12 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
   }
 
   private void GameImput_OnInteractAction(object sender, System.EventArgs e) {
-    if (SelectedCounter != null) {
-      SelectedCounter.Interact(this);
-    }
+    if (!KitchenGameManager.Instance.IsGamePlaying())
+      return;
+    if (SelectedCounter == null)
+      return;
+
+    SelectedCounter.Interact(this);
   }
 
   private void HandleInteractions() {

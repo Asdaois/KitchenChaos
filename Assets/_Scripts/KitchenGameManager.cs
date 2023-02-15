@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour {
+  public static KitchenGameManager Instance { get; private set; }
 
   enum GameState {
     WaitingForStart,
@@ -24,6 +25,9 @@ public class KitchenGameManager : MonoBehaviour {
     currentState = value;
   }
 
+  private void Awake() {
+    Instance = this;
+  }
 
   private void Start() {
     waitingForStartTimer.OnTimeup += WaitingForStartTimer_OnTimeup;
@@ -54,5 +58,9 @@ public class KitchenGameManager : MonoBehaviour {
 
     SetCurrentState(GameState.CountdownToStart);
     countdownToStartTimer.StartTimer();
+  }
+
+  public bool IsGamePlaying() {
+    return currentState == GameState.GamePlaying;
   }
 }
