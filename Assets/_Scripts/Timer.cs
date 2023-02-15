@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
 
   [SerializeField] private bool isActive;
   [SerializeField] private bool oneshoot;
-  [SerializeField, Min(0)] float time;
+  [SerializeField, Min(0.1f)] float time = 0.1f;
   float currentTime;
 
 

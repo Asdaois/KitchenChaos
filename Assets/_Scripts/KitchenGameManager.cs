@@ -4,6 +4,7 @@ using UnityEngine;
 public class KitchenGameManager : MonoBehaviour {
   public event EventHandler OnStateChanged;
   public static KitchenGameManager Instance { get; private set; }
+  [SerializeField] float timeToPlay;
 
   enum GameState {
     WaitingForStart,
@@ -39,6 +40,7 @@ public class KitchenGameManager : MonoBehaviour {
     gamePlayingTimer.OnTimeup += GamePlayingTimer_OnTimeup;
 
     waitingForStartTimer.StartTimer();
+    gamePlayingTimer.SetAlarmTime(timeToPlay);
   }
 
   private void GamePlayingTimer_OnTimeup(object sender, System.EventArgs e) {
@@ -78,5 +80,9 @@ public class KitchenGameManager : MonoBehaviour {
 
   internal bool IsGameOverActive() {
     return currentState == GameState.GameOver;
+  }
+
+  public float GetCurrentPlayedTimeInPercentage() {
+    return gamePlayingTimer.GetCurrentTimeUntilAlarm() / gamePlayingTimer.GetAlarmTime();
   }
 }
