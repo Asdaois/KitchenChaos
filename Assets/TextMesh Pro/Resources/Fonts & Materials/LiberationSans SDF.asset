@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF Material
   m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_Parent: {fileID: 2100000, guid: 3a4c28be55f93fa44863650ec7b5d771, type: 2}
+  m_Parent: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -25,8 +25,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ScaleRatioA: 0.8053691
-    - _ScaleRatioC: 0.08324995
+    - _OutlineSoftness: 0
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioC: 0.64125
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &11400000
