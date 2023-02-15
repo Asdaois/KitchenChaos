@@ -1279,6 +1279,7 @@ Transform:
   - {fileID: 1185851959}
   - {fileID: 1637317049}
   - {fileID: 782142472}
+  - {fileID: 887467373}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1982,6 +1983,104 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: c508617574fadfe48a67aac49547d1e6, type: 2}
+--- !u!1 &887467372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 887467373}
+  - component: {fileID: 887467374}
+  - component: {fileID: 887467377}
+  - component: {fileID: 887467376}
+  - component: {fileID: 887467375}
+  m_Layer: 0
+  m_Name: KitchenGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &887467373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887467372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 456579625}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &887467374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887467372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40677246808e9034b8340cda14d94477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitingForStartTimer: {fileID: 0}
+  countdownToStartTimer: {fileID: 0}
+  gamePlayingTimer: {fileID: 0}
+--- !u!114 &887467375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887467372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149198223ba84a44aac8c34a72719e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerName: Game Playing Timer
+  isActive: 0
+  oneshoot: 1
+  time: 10
+--- !u!114 &887467376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887467372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149198223ba84a44aac8c34a72719e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerName: Countdown To Start Timer
+  isActive: 0
+  oneshoot: 1
+  time: 3
+--- !u!114 &887467377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887467372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149198223ba84a44aac8c34a72719e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerName: Waiting For Start Timer
+  isActive: 0
+  oneshoot: 1
+  time: 3
 --- !u!1 &948640152
 GameObject:
   m_ObjectHideFlags: 0

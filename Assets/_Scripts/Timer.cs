@@ -38,4 +38,8 @@ public class Timer : MonoBehaviour {
   public void StopTimer() {
     isActive = false;
   }
+
+  public void SetOneShot(bool v) {
+    oneshoot = v;
+  }
 }
