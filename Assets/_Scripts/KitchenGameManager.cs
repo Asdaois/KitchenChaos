@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour {
+  public event EventHandler OnStateChanged;
   public static KitchenGameManager Instance { get; private set; }
 
   enum GameState {
@@ -23,6 +25,7 @@ public class KitchenGameManager : MonoBehaviour {
   private void SetCurrentState(GameState value) {
     Debug.Log($"state changed from {currentState} to {value}");
     currentState = value;
+    OnStateChanged?.Invoke(this, EventArgs.Empty);
   }
 
   private void Awake() {
@@ -62,5 +65,13 @@ public class KitchenGameManager : MonoBehaviour {
 
   public bool IsGamePlaying() {
     return currentState == GameState.GamePlaying;
+  }
+
+  public bool IsCountdownToSTartActive() {
+    return currentState == GameState.CountdownToStart;
+  }
+
+  public float GetCurrentCountDownTimerTime() {
+    return countdownToStartTimer.GetAlarmTime() - countdownToStartTimer.GetCurrentTimeUntilAlarm();
   }
 }

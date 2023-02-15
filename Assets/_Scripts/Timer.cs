@@ -42,4 +42,16 @@ public class Timer : MonoBehaviour {
   public void SetOneShot(bool v) {
     oneshoot = v;
   }
+
+  public float GetCurrentTimeUntilAlarm() {
+    return currentTime;
+  }
+
+  public void SetAlarmTime(float aTimerTime) {
+    time = aTimerTime;
+  }
+
+  public float GetAlarmTime() {
+    return time;
+  }
 }

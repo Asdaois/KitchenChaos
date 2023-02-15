@@ -2030,9 +2030,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40677246808e9034b8340cda14d94477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingForStartTimer: {fileID: 0}
-  countdownToStartTimer: {fileID: 0}
-  gamePlayingTimer: {fileID: 0}
+  waitingForStartTimer: {fileID: 887467377}
+  countdownToStartTimer: {fileID: 887467376}
+  gamePlayingTimer: {fileID: 887467375}
 --- !u!114 &887467375
 MonoBehaviour:
   m_ObjectHideFlags: 0
