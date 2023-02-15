@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour {
   public event EventHandler OnStateChanged;
+  public event EventHandler OnGamePauseChanged;
   public static KitchenGameManager Instance { get; private set; }
   [SerializeField] float timeToPlay;
 
@@ -17,10 +18,32 @@ public class KitchenGameManager : MonoBehaviour {
   [SerializeField] private Timer countdownToStartTimer;
   [SerializeField] private Timer gamePlayingTimer;
 
+  private bool isGamePaused = false;
+
 
   private GameState currentState;
   private GameState GetCurrentState() {
     return currentState;
+  }
+
+
+  private void GameImput_OnPauseAction(object sender, EventArgs e) {
+    if (isGamePaused)
+      ResumeGame();
+    else
+      PauseGame();
+
+    OnGamePauseChanged?.Invoke(this, new());
+  }
+
+  private void PauseGame() {
+    Time.timeScale = 0f;
+    isGamePaused = true;
+  }
+
+  private void ResumeGame() {
+    Time.timeScale = 1f;
+    isGamePaused = false;
   }
 
   private void SetCurrentState(GameState value) {
@@ -41,6 +64,8 @@ public class KitchenGameManager : MonoBehaviour {
 
     waitingForStartTimer.StartTimer();
     gamePlayingTimer.SetAlarmTime(timeToPlay);
+
+    GameImput.Instance.OnPauseAction += GameImput_OnPauseAction;
   }
 
   private void GamePlayingTimer_OnTimeup(object sender, System.EventArgs e) {
@@ -85,4 +110,6 @@ public class KitchenGameManager : MonoBehaviour {
   public float GetCurrentPlayedTimeInPercentage() {
     return gamePlayingTimer.GetCurrentTimeUntilAlarm() / gamePlayingTimer.GetAlarmTime();
   }
+
+  public bool GetIsGamePaused() => isGamePaused;
 }
